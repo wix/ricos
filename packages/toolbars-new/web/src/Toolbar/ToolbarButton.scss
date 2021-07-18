@@ -15,6 +15,15 @@
       }
     }
   }
+
+  &.toolbarButton_wrapper_mobile {
+    &.toolbarButton_wrapper_asLink {
+      button {
+        min-width: calc(100vw - 109px);
+      }
+    }
+  }
+
   &.toolbarButton_wrapper_asLink {
     button {
       display: inline-block;

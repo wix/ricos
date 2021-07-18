@@ -309,14 +309,16 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
     const textToolbarType = StaticToolbar ? 'static' : null;
     // const textToolbarType = StaticToolbar && !isMobile ? 'static' : null;
 
-    // let showFormattingToolbar;
-    // if (newFormattingToolbar && textToolbarType !== 'static' && !isMobile && activeEditor) {
-    //   const editorCommands: EditorCommands = activeEditor.getEditorCommands();
-    //   const selection = editorCommands.getSelection();
-    //   showFormattingToolbar = !selection.getIsCollapsed && selection.getIsFocused;
-    // } else {
-    //   showFormattingToolbar = true;
-    // }
+    let hideFormattingToolbar; //when LinkToolbar is open in mobile
+    if (newFormattingToolbar && activeEditor && isMobile) {
+      const editorCommands: EditorCommands = activeEditor.getEditorCommands();
+      const selection = editorCommands.getSelection();
+      if (isMobile) {
+        hideFormattingToolbar = selection.getIsCollapsed && editorCommands.hasLinkInSelection();
+      } else {
+        hideFormattingToolbar = false;
+      }
+    }
 
     return (
       <Fragment key={`${remountKey}`}>
@@ -324,18 +326,20 @@ export class RicosEditor extends Component<RicosEditorProps, State> {
         {/* {newFormattingToolbar && activeEditor && showFormattingToolbar && ( */}
         {newFormattingToolbar && activeEditor && (
           <>
-            <TextFormattingToolbar
-              activeEditor={activeEditor}
-              textToolbarType={textToolbarType}
-              isMobile={isMobile}
-              theme={theme}
-              locale={locale}
-              getToolbarSettings={getToolbarSettings}
-              helpers={helpers}
-              plugins={plugins}
-              linkPanelSettings={linkPanelSettings}
-              linkSettings={linkSettings}
-            />
+            {!hideFormattingToolbar && (
+              <TextFormattingToolbar
+                activeEditor={activeEditor}
+                textToolbarType={textToolbarType}
+                isMobile={isMobile}
+                theme={theme}
+                locale={locale}
+                getToolbarSettings={getToolbarSettings}
+                helpers={helpers}
+                plugins={plugins}
+                linkPanelSettings={linkPanelSettings}
+                linkSettings={linkSettings}
+              />
+            )}
             <LinkToolbar
               activeEditor={activeEditor}
               textToolbarType={textToolbarType}
