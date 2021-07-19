@@ -220,7 +220,8 @@ export default function createAtomicPluginToolbar({
       };
 
       const editorState = getEditorState();
-      const pluginType = this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
+      const pluginType =
+        editorState && this.focusedBlock && getBlockEntityType(editorState, this.focusedBlock);
       const buttonProps = {
         ...this.mapComponentDataToButtonProps(button, this.state.componentData),
         ...this.mapStoreDataToButtonProps(button, pubsub.store, this.state.componentData),
