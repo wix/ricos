@@ -73,16 +73,16 @@ class TableComponent extends React.Component {
 
   selectCellContent = (i, j) => {
     this.table.getCell(i, j).content = this.innerEditorsRefs[`${i}-${j}`].selectAllContent(true);
-    this.setComponentData(this.table.componentData);
+    this.updateComponentData(this.table.componentData);
   };
 
   updateTable = data => {
-    this.setComponentData(data);
+    this.updateComponentData(data);
     this.setState({ updateAllRows: true });
   };
 
-  setComponentData = data => {
-    this.props.store.set('componentData', { ...data }, this.props.block.key);
+  updateComponentData = data => {
+    this.props.store.update('componentData', { ...data });
   };
 
   renderInnerRCE = (i, j) => {
