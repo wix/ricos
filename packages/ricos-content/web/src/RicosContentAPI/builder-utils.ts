@@ -64,7 +64,7 @@ export function addNode({
   ]);
 }
 
-const isTextData = (text: Record<string, unknown>) => 'text' in text && 'decorations' in text;
+const isTextData = (text: Record<string, unknown>) => !!text?.text && !!text?.decorations;
 
 const toTextData = (text: string) => ({ text, decorations: [] });
 
