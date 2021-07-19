@@ -1,4 +1,4 @@
-import { has, isNumber, isString, isArray } from 'lodash';
+import { isNumber, isString, isArray } from 'lodash';
 import { flow } from 'fp-ts/lib/function';
 import * as A from 'fp-ts/lib/Array';
 import * as O from 'fp-ts/lib/Option';
@@ -64,11 +64,9 @@ export function addNode({
   ]);
 }
 
-const isTextData = text => has(text, 'text') && has(text, 'decorations');
+const isTextData = (text: Record<string, unknown>) => 'text' in text && 'decorations' in text;
 
-const toArray = t => [t];
-
-const toTextData = text => ({ text, decorations: [] });
+const toTextData = (text: string) => ({ text, decorations: [] });
 
 const toListItemData = (data: ParagraphData) => (text: TextData[]) => ({ data, text });
 
@@ -77,13 +75,13 @@ export function toListDataArray(
   data: ParagraphData
 ): ListItemData[] {
   return firstResolved([
-    either(isString)(items).map(flow(toTextData, toArray, toListItemData(data), toArray)),
-    either(isTextData)(items).map(flow(toArray, toListItemData(data), toArray)),
+    either(isString)(items).map(flow(toTextData, A.of, toListItemData(data), A.of)),
+    either(isTextData)(items).map(flow(A.of, toListItemData(data), A.of)),
     either(isArray)(items).map(
       A.map(item =>
         firstResolved([
-          either(isString)(item).map(flow(toTextData, toArray, toListItemData(data))),
-          either(isTextData)(item).map(flow(toArray, toListItemData(data))),
+          either(isString)(item).map(flow(toTextData, A.of, toListItemData(data))),
+          either(isTextData)(item).map(flow(A.of, toListItemData(data))),
           task.of(item),
         ])
       )
@@ -91,11 +89,11 @@ export function toListDataArray(
     task.of([]),
   ]);
 }
-export function toTextDataArray(text?: string | TextData | (string | TextData)[]): TextData[] {
+export const toTextDataArray = (text?: string | TextData | (string | TextData)[]): TextData[] => {
   return firstResolved([
-    either(isString)(text).map(flow(toTextData, toArray)),
-    either(isTextData)(text).map(toArray),
+    either(isString)(text).map(flow(toTextData, A.of)),
+    either(isTextData)(text).map(A.of),
     either(isArray)(text).map(A.map(t => (isString(t) ? toTextData(t) : t))),
     task.of([]),
   ]);
-}
+};
