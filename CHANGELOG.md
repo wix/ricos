@@ -16,6 +16,17 @@
     Changes that have landed in master but are not yet released.
     Click to see more.
   </summary>
+  
+### :rocket: New Feature
+- `ricos-content`
+  - [#2740](https://github.com/wix/ricos/pull/2740) fromHtml/CKEditor convertor
+  - [#2740](https://github.com/wix/ricos/pull/2740) `fromHtml` converter now exposed as `server-side-converters/fromRichTextHtml`
+  
+### :bug: Bug Fix
+- `editor`
+  - [#2708](https://github.com/wix/ricos/pull/2708) error boundary lifted from RCE to Ricos
+- `loadable`
+  - [#2745](https://github.com/wix/ricos/pull/2745) CJS bundle fix
 
 </details>
 <hr/>

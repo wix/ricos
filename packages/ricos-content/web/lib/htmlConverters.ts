@@ -1,1 +1,1 @@
-export { fromHtml, toHtml } from '../src/converters/html';
+export { fromRichTextHtml as fromHtml, toHtml } from '../src/converters/html';
