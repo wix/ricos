@@ -197,46 +197,86 @@ const gallery = {
   data1: GalleryData.fromJSON({
     items: [
       {
-        metadata: {
-          type: 'image',
-          height: 3497,
-          width: 5000,
+        image: {
+          url: '8bb438_a3a11b05e3f54f77ba1c04dfba22c99c.jpg',
+          metadata: {
+            height: 3497,
+            width: 5000,
+          },
         },
         itemId: 'be4312f031f9850a825b2064b9c92d72',
-        url: '8bb438_a3a11b05e3f54f77ba1c04dfba22c99c.jpg',
       },
       {
-        metadata: {
-          type: 'image',
-          height: 3733,
-          width: 5600,
+        image: {
+          url: '8bb438_f89f7e8aac574a0f962437d4f369b37a.jpg',
+          metadata: {
+            height: 3733,
+            width: 5600,
+          },
         },
         itemId: '682b2132c2697fb0e467e21977beeaa2',
-        url: '8bb438_f89f7e8aac574a0f962437d4f369b37a.jpg',
       },
       {
-        metadata: {
-          type: 'image',
-          height: 3727,
-          width: 5600,
+        image: {
+          url: '8bb438_a132b18dea524d48a68a37f0075fcc1e.jpg',
+          metadata: {
+            height: 3727,
+            width: 5600,
+          },
         },
         itemId: '0ee95e519c2e1274c30f56e3c098ec86',
-        url: '8bb438_a132b18dea524d48a68a37f0075fcc1e.jpg',
       },
     ],
+    styles: {
+      layouting: {
+        layout: 'GRID',
+        horizontalScroll: false,
+        orientation: 'HORIZONTAL',
+        itemsPerRow: 3,
+      },
+      itemStyling: {
+        targetSize: 300,
+        ratio: 1,
+        crop: 'FILL',
+        margin: 5,
+      },
+      thumbnailsLayout: {
+        alignment: 'BOTTOM',
+        spacings: 0,
+      },
+    },
   }),
   data2: GalleryData.fromJSON({
     items: [
       {
-        metadata: {
-          type: 'image',
-          height: 3727,
-          width: 5600,
+        image: {
+          url: '8bb438_a132b18dea524d48a68a37f0075fcc1e.jpg',
+          metadata: {
+            height: 3727,
+            width: 5600,
+          },
         },
         itemId: '0ee95e519c2e1274c30f56e3c098ec86',
-        url: '8bb438_a132b18dea524d48a68a37f0075fcc1e.jpg',
       },
     ],
+    styles: {
+      layouting: {
+        layout: 'GRID',
+        horizontalScroll: false,
+        orientation: 'HORIZONTAL',
+        itemsPerRow: 3,
+      },
+      itemStyling: {
+        targetSize: 300,
+        ratio: 1,
+        crop: 'FILL',
+        margin: 5,
+      },
+      thumbnailsLayout: {
+        alignment: 'BOTTOM',
+        spacings: 0,
+      },
+    },
   }),
   expectedData1: {
     config: {
@@ -275,33 +315,16 @@ const gallery = {
       },
     ],
     styles: {
-      allowContextMenu: true,
-      allowDownload: false,
-      allowHover: true,
-      allowSocial: false,
       cubeRatio: 1,
       cubeType: 'fill',
-      enableInfiniteScroll: true,
-      fullscreen: false,
       galleryLayout: 2,
-      galleryMargin: 0,
       gallerySizePx: 300,
-      gallerySizeType: 'px',
       galleryThumbnailsAlignment: 'bottom',
-      gotStyleParams: true,
-      gridStyle: 1,
+      numberOfImagesPerRow: 3,
       imageMargin: 5,
       isVertical: false,
-      itemClick: 'link',
-      loveButton: false,
-      mobileSwipeAnimation: 'NO_EFFECT',
       oneRow: false,
-      showArrows: false,
-      showVideoPlayButton: true,
-      thumbnailSize: 120,
       thumbnailSpacings: 0,
-      titlePlacement: 'SHOW_ON_HOVER',
-      videoPlay: 'onClick',
     },
   },
   expectedData2: {
@@ -323,33 +346,16 @@ const gallery = {
       },
     ],
     styles: {
-      allowContextMenu: true,
-      allowDownload: false,
-      allowHover: true,
-      allowSocial: false,
       cubeRatio: 1,
       cubeType: 'fill',
-      enableInfiniteScroll: true,
-      fullscreen: false,
       galleryLayout: 2,
-      galleryMargin: 0,
       gallerySizePx: 300,
-      gallerySizeType: 'px',
       galleryThumbnailsAlignment: 'bottom',
-      gotStyleParams: true,
-      gridStyle: 1,
+      numberOfImagesPerRow: 3,
       imageMargin: 5,
       isVertical: false,
-      itemClick: 'link',
-      loveButton: false,
-      mobileSwipeAnimation: 'NO_EFFECT',
       oneRow: false,
-      showArrows: false,
-      showVideoPlayButton: true,
-      thumbnailSize: 120,
       thumbnailSpacings: 0,
-      titlePlacement: 'SHOW_ON_HOVER',
-      videoPlay: 'onClick',
     },
   },
 };
