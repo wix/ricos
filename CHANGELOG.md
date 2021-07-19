@@ -27,6 +27,8 @@
   - [#2708](https://github.com/wix/ricos/pull/2708) error boundary lifted from RCE to Ricos
 - `loadable`
   - [#2745](https://github.com/wix/ricos/pull/2745) CJS bundle fix
+- `*`
+  - [#2749](https://github.com/wix/ricos/pull/2749) remove string.matchAll to work in safari 12
 
 </details>
 <hr/>
