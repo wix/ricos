@@ -73,16 +73,16 @@ class TableComponent extends React.Component {
 
   selectCellContent = (i, j) => {
     this.table.getCell(i, j).content = this.innerEditorsRefs[`${i}-${j}`].selectAllContent(true);
-    this.updateComponentData(this.table.componentData);
+    this.setComponentData(this.table.componentData);
   };
 
   updateTable = data => {
-    this.updateComponentData(data);
+    this.setComponentData(data);
     this.setState({ updateAllRows: true });
   };
 
-  updateComponentData = data => {
-    this.props.store.update('componentData', { ...data });
+  setComponentData = data => {
+    this.props.store.set('componentData', { ...data }, this.props.block.key);
   };
 
   renderInnerRCE = (i, j) => {
@@ -535,7 +535,6 @@ class TableComponent extends React.Component {
     const isEditMode = !isMobile && isTableOnFocus;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
-    this.table.updateComponentData(componentData);
     return (
       <div
         className={classNames(styles.tableEditorContainer, 'has-custom-focus', {
