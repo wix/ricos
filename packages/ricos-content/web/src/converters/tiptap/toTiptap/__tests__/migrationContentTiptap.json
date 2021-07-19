@@ -473,31 +473,39 @@
         },
         "items": [
           {
-            "metadata": {
-              "height": 3733,
-              "width": 5600,
-              "type": "IMAGE"
+            "image": {
+              "url": "8bb438_0ab44689f626435c94b9a5b996524aba.jpg",
+              "metadata": {
+                "height": 3733,
+                "width": 5600
+              } 
             },
-            "itemId": "2c2698b83ba64574db5e28ed54064081",
-            "url": "8bb438_0ab44689f626435c94b9a5b996524aba.jpg"
+            "itemId": "2c2698b83ba64574db5e28ed54064081"
           },
           {
-            "metadata": {
-              "height": 1922,
-              "width": 1920,
-              "type": "IMAGE"
+            "image": {
+              "url": "8bb438_6a7159be0f944dde9098fe566bf22831.jpg",
+              "metadata": {
+                "height": 1922,
+                "width": 1920
+              }
             },
-            "itemId": "a327950f89cc4994f34a0cd0d4a71473",
-            "url": "8bb438_6a7159be0f944dde9098fe566bf22831.jpg"
+            "itemId": "a327950f89cc4994f34a0cd0d4a71473"
           },
           {
-            "metadata": {
-              "height": 3727,
-              "width": 5600,
-              "type": "IMAGE"
+            "video": {
+              "url": "0d72ac_31569a98fd8d436f98ae9c827c216443",
+              "metadata": {
+                "width": 1920,
+                "height": 1080
+              },
+              "thumbnail": {
+                "url": "0d72ac_31569a98fd8d436f98ae9c827c216443f000.jpg",
+                "height": 1080,
+                "width": 1920
+              }
             },
-            "itemId": "f6db1b532552aa00e9549b5c97e6770a",
-            "url": "8bb438_cabd67053eae45e7ab273832504717ff.jpg"
+            "itemId": "d19570fa-e97f-4b3d-b8ad-4e24b3a9a3ec"
           }
         ],
         "styles": {

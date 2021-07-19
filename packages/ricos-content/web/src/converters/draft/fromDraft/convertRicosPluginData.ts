@@ -135,16 +135,21 @@ const convertGalleryStyles = styles => {
 };
 
 const convertGalleryItem = item => {
-  item.metadata.type = item.metadata.type.toUpperCase();
-  if (item.metadata.type === 'VIDEO') {
-    item.metadata.thumbail =
-      typeof item.metadata.poster === 'string'
+  const {
+    url,
+    metadata,
+    metadata: { type, poster, height, width },
+  } = item;
+  item[type] = { url, metadata };
+  if (type === 'video') {
+    item.video.thumbnail =
+      typeof poster === 'string'
         ? {
-            url: item.metadata.poster,
-            height: item.metadata.height,
-            width: item.metadata.width,
+            url: poster,
+            height,
+            width,
           }
-        : item.metadata.poster;
+        : poster;
   }
   return item;
 };

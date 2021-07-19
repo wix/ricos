@@ -971,12 +971,17 @@
           },
           {
             "metadata": {
-              "type": "image",
-              "height": 3727,
-              "width": 5600
+              "type": "video",
+              "width": 1920,
+              "height": 1080,
+              "poster": {
+                "url": "0d72ac_31569a98fd8d436f98ae9c827c216443f000.jpg",
+                "height": 1080,
+                "width": 1920
+              }
             },
-            "itemId": "f6db1b532552aa00e9549b5c97e6770a",
-            "url": "8bb438_cabd67053eae45e7ab273832504717ff.jpg"
+            "itemId": "d19570fa-e97f-4b3d-b8ad-4e24b3a9a3ec",
+            "url": "0d72ac_31569a98fd8d436f98ae9c827c216443"
           }
         ],
         "styles": {

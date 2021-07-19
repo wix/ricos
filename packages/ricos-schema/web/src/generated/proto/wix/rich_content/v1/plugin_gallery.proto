@@ -75,25 +75,37 @@ message GalleryData {
     google.protobuf.StringValue key = 4;
   }
   
-  message ItemMetadata {
-    enum Type {
-      IMAGE = 0;
-      VIDEO = 1;
+  message Item {
+    message ItemMetadata {
+      google.protobuf.Int32Value height = 1;
+      google.protobuf.Int32Value width = 2;
+      google.protobuf.StringValue title = 3;
+      google.protobuf.StringValue altText = 4;
+      Link link = 5;
     }
 
-    google.protobuf.Int32Value height = 1;
-    google.protobuf.Int32Value width = 2;
-    google.protobuf.StringValue title = 3;
-    Type type = 4;
-    google.protobuf.StringValue altText = 5;
-    Link link = 6;
-    Media thumbnail = 7;
-  }
-  
-  message Item {
-    ItemMetadata metadata = 1;
-    google.protobuf.StringValue item_id = 2;
-    google.protobuf.StringValue url = 3;
+    message Video {
+      message Thumbnail {
+        google.protobuf.StringValue url = 1;
+        google.protobuf.Int32Value height = 2;
+        google.protobuf.Int32Value width = 3;
+      }
+
+      google.protobuf.StringValue url = 1;
+      ItemMetadata metadata = 2;
+      Thumbnail thumbnail = 3;
+    }
+
+    message Image {
+      google.protobuf.StringValue url = 1;
+      ItemMetadata metadata = 2;
+    }
+
+    google.protobuf.StringValue item_id = 1;
+    oneof data {
+      Image image = 2;
+      Video video = 3;
+    }
   }
 
   PluginContainerData container_data = 1;

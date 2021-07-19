@@ -197,31 +197,34 @@ const gallery = {
   data1: GalleryData.fromJSON({
     items: [
       {
-        metadata: {
-          type: 'IMAGE',
-          height: 3497,
-          width: 5000,
+        image: {
+          url: '8bb438_a3a11b05e3f54f77ba1c04dfba22c99c.jpg',
+          metadata: {
+            height: 3497,
+            width: 5000,
+          },
         },
         itemId: 'be4312f031f9850a825b2064b9c92d72',
-        url: '8bb438_a3a11b05e3f54f77ba1c04dfba22c99c.jpg',
       },
       {
-        metadata: {
-          type: 'IMAGE',
-          height: 3733,
-          width: 5600,
+        image: {
+          url: '8bb438_f89f7e8aac574a0f962437d4f369b37a.jpg',
+          metadata: {
+            height: 3733,
+            width: 5600,
+          },
         },
         itemId: '682b2132c2697fb0e467e21977beeaa2',
-        url: '8bb438_f89f7e8aac574a0f962437d4f369b37a.jpg',
       },
       {
-        metadata: {
-          type: 'IMAGE',
-          height: 3727,
-          width: 5600,
+        image: {
+          url: '8bb438_a132b18dea524d48a68a37f0075fcc1e.jpg',
+          metadata: {
+            height: 3727,
+            width: 5600,
+          },
         },
         itemId: '0ee95e519c2e1274c30f56e3c098ec86',
-        url: '8bb438_a132b18dea524d48a68a37f0075fcc1e.jpg',
       },
     ],
     styles: {
@@ -246,13 +249,14 @@ const gallery = {
   data2: GalleryData.fromJSON({
     items: [
       {
-        metadata: {
-          type: 'IMAGE',
-          height: 3727,
-          width: 5600,
+        image: {
+          url: '8bb438_a132b18dea524d48a68a37f0075fcc1e.jpg',
+          metadata: {
+            height: 3727,
+            width: 5600,
+          },
         },
         itemId: '0ee95e519c2e1274c30f56e3c098ec86',
-        url: '8bb438_a132b18dea524d48a68a37f0075fcc1e.jpg',
       },
     ],
     styles: {

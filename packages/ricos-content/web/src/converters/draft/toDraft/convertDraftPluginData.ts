@@ -192,9 +192,13 @@ const convertGalleryStyles = styles => {
 };
 
 const convertGalleryItem = item => {
-  item.metadata.type = item.metadata.type.toLowerCase();
-  has(item, 'metadata.thumbnail') && (item.metadata.poster = item.metadata.thumbnail);
-  delete item.metadata.thumbnail;
+  const type = has(item, 'image') ? 'image' : 'video';
+  item.metadata = item[type].metadata;
+  item.metadata.type = type;
+  item.url = item[type].url;
+  has(item, 'video.thumbnail') && (item.metadata.poster = item.video.thumbnail);
+  delete item.video;
+  delete item.image;
   return item;
 };
 
