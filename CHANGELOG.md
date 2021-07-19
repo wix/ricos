@@ -17,6 +17,11 @@
     Click to see more.
   </summary>
   
+
+</details>
+<hr/>
+
+## 8.47.0 (July 19, 2021)
 ### :rocket: New Feature
 - `ricos-content`
   - [#2740](https://github.com/wix/ricos/pull/2740) fromHtml/CKEditor convertor
@@ -27,9 +32,6 @@
   - [#2708](https://github.com/wix/ricos/pull/2708) error boundary lifted from RCE to Ricos
 - `loadable`
   - [#2745](https://github.com/wix/ricos/pull/2745) CJS bundle fix
-
-</details>
-<hr/>
 
 ## 8.46.19 (July 18, 2021)
 
