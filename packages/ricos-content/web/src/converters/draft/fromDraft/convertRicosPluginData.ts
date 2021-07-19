@@ -138,19 +138,19 @@ const convertGalleryItem = item => {
   const {
     url,
     metadata,
-    metadata: { type, poster, height, width },
+    metadata: { type, poster, height, width, link },
   } = item;
   item[type] = { url, metadata };
-  if (type === 'video') {
-    item.video.thumbnail =
+  type === 'video' &&
+    (item.video.thumbnail =
       typeof poster === 'string'
         ? {
             url: poster,
             height,
             width,
           }
-        : poster;
-  }
+        : poster);
+  type === 'image' && link && (item.image.link = link);
   return item;
 };
 

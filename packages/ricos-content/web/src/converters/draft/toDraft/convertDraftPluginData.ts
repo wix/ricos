@@ -197,6 +197,7 @@ const convertGalleryItem = item => {
   item.metadata.type = type;
   item.url = item[type].url;
   has(item, 'video.thumbnail') && (item.metadata.poster = item.video.thumbnail);
+  has(item, 'image.link') && (item.metadata.link = item.image.link);
   delete item.video;
   delete item.image;
   return item;

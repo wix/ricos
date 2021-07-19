@@ -81,7 +81,6 @@ message GalleryData {
       google.protobuf.Int32Value width = 2;
       google.protobuf.StringValue title = 3;
       google.protobuf.StringValue altText = 4;
-      Link link = 5;
     }
 
     message Video {
@@ -99,6 +98,7 @@ message GalleryData {
     message Image {
       google.protobuf.StringValue url = 1;
       ItemMetadata metadata = 2;
+      Link link = 3;
     }
 
     google.protobuf.StringValue item_id = 1;
