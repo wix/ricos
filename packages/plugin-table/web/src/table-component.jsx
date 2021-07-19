@@ -535,6 +535,7 @@ class TableComponent extends React.Component {
     const isEditMode = !isMobile && isTableOnFocus;
     const rowNum = this.table.getRowNum();
     const colNum = this.table.getColNum();
+    this.table.updateComponentData(componentData);
     return (
       <div
         className={classNames(styles.tableEditorContainer, 'has-custom-focus', {
